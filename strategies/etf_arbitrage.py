@@ -7,7 +7,7 @@ totalCountDict = defaultdict(int) # number of trades
 windowDict = defaultdict(list) # last n prices
 
 def etf(data, p, test):
-	MARGIN = 30
+	MARGIN = 100
 	valid_symbols = ['XLK', 'GOOG', 'AAPL', 'MSFT', 'BOND']
 	read_data(
 		data, p, test, 
@@ -18,7 +18,11 @@ def etf(data, p, test):
 	)
 	trades = []
 	constituents = get_local_average('GOOG', windowDict) + get_local_average('AAPL', windowDict) + get_local_average('MSFT', windowDict) + 1000
-	
+	constituents = constituents / 10
+	if abs(p.get('XLK')) > 90:
+		direction = p.get('XLK') < 0 # False if we want to sell
+		print('tons of xlk')
+
 	if data['type'] == 'book':
 		
 		symbol = data['symbol']

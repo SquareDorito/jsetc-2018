@@ -29,6 +29,19 @@ class Bot:
 		print('type: ', data['type'])
 		self.id += 1
 
+	def convert(self, sym, dir, size, buy):
+		direction = 'BUY' if buy else 'SELL'
+		order = {
+			'type': 'convert',
+			'order_id': self.id,
+			'symbol': sym,
+			'dir': direction,
+			'size': size
+		}
+		self.write_to_exchange(order)
+		data = self.read_from_exchange()
+		print('type: ', data['type'])
+		self.id += 1
 
 	def run(self, data, p):
 		for strategy in strategies:
