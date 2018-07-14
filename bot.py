@@ -9,7 +9,7 @@ class Bot:
         self.id = 0
 
     def write_to_exchange(self, obj):
-        json.dump(obj, self.exchange)
+    	json.dump(obj, self.exchange)
         self.exchange.write("\n")
     
     def trade(self, sym, price, size, buy):
@@ -27,7 +27,7 @@ class Bot:
 
 
     def run(self, data):
-        for strategy in strategies:
+    	for strategy in strategies:
             trades = strategy(data, False)
             for trade in trades:
                 if len(trade) == 0:
@@ -36,7 +36,7 @@ class Bot:
                 self.trade(sym, price, size, buy)
  	
  	def test_run(self, data):
-        for strategy in test_strategies:
+ 		for strategy in test_strategies:
             trades = strategy(data, True)
             for trade in trades:
                 if len(trade) == 0:
