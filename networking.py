@@ -41,7 +41,6 @@ def main(test_mode, srv):
     if test_mode:
         print('IN TEST MODE')
     test_exchange_index=srv
-    prod_exchange_hostname="production"
 
     port=25000 + (test_exchange_index if test_mode else 0)
 
