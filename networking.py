@@ -83,12 +83,7 @@ def main(test_mode, srv):
     while True:
         data = read_from_exchange(exchange)
         data_type = data['type']
-        if test_mode:
-            b.test_run(data, p)
-        else:
-            b.run(data, p)
-
-        if data_type in ['fill', 'ack', 'reject']:
+        while data_type in ['fill', 'ack', 'reject']:
             print(data)
             if data_type == 'fill':
                 delta = 1 if data['dir'] == 'SELL' else -1
@@ -96,10 +91,15 @@ def main(test_mode, srv):
                 
                 p.update(sym, -1 * delta * data['size'])
                 p.update('usd', delta * data['size'] * data['price'])
-                print(p)
+                print(p)  
+            data = read_from_exchange(exchange)
+            data_type = data['type']
 
-            write_to_exchange(exchange, {"type": "hello", "team": team_name.upper()})
-            hello_from_exchange = read_from_exchange(exchange)            
+        if test_mode:
+            b.test_run(data, p)
+        else:
+            b.run(data, p)
+     
 
 if __name__ == "__main__":
     parser = ArgumentParser('etc')

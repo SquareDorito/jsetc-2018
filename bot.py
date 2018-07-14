@@ -25,8 +25,6 @@ class Bot:
 			'size': size,
 		}
 		self.write_to_exchange(order)
-		data = self.read_from_exchange()
-		print(data)
 		self.id += 1
 
 	def convert(self, sym, dir, size, buy):
@@ -39,8 +37,6 @@ class Bot:
 			'size': size
 		}
 		self.write_to_exchange(order)
-		data = self.read_from_exchange()
-		print(data)
 		self.id += 1
 
 	def run(self, data, p):
