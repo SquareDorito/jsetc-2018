@@ -3,4 +3,4 @@ from .average import average
 from .etf_arbitrage import etf
 
 strategies = [simple_bond, average]
-test_strategies = [average, etf]
+test_strategies = [average]
