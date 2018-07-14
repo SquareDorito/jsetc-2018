@@ -1,10 +1,9 @@
 from collections import defaultdict
 
 MIN_COUNT_TO_TRADE = 5 # when do we trust our average?
-MARGIN = 2              # how far from the estimated value should we be to trade?
 averageDict = defaultdict(int)
 totalCountDict = defaultdict(int)
-
+MARGIN = 20
 WINDOW_SIZE = 10
 windowDict = defaultdict(list)
 
