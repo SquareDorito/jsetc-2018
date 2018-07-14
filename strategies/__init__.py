@@ -1,4 +1,4 @@
 from .simple_bond import simple_bond
-from .rolling_average import rolling_average
+from .average import average
 
 strategies = [simple_bond]
