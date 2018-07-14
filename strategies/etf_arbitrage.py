@@ -4,7 +4,7 @@ from collections import defaultdict
 MIN_COUNT_TO_TRADE = 5
 averageDict = defaultdict(int) # averages from the start
 totalCountDict = defaultdict(int) # number of trades
-windowDict = defaultdict(int) # last n prices
+windowDict = defaultdict(list) # last n prices
 
 XLK_HEDGE = 0
 
@@ -13,10 +13,10 @@ def etf(data, p, test):
 	valid_symbols = ['XLK', 'GOOG', 'AAPL', 'MSFT', 'BOND']
 	read_data(
 		data, p, test, 
-		averageDict, 
-		totalCountDict, 
-		windowDict, 
-		valid_symbols
+		averageDict=averageDict, 
+		totalCountDict=totalCountDict, 
+		windowDict=windowDict, 
+		valid_symbols=valid_symbols
 	)
 	trades = []
 	constituents = windowDict['GOOG'] + windowDict['AAPL'] + windowDict['MSFT'] + 1000
