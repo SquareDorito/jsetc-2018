@@ -38,7 +38,7 @@ def adr_pair(data, p, test):
 				trades.append(('BABA', price, temp_size, True))
 
 		asks=data['sell']
-        for price, size in asks:
+		for price, size in asks:
 			if price<get_local_average('BABZ'):
 				if p.get('babz')>=10:
 					break
