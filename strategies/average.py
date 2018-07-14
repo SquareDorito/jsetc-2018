@@ -16,11 +16,11 @@ def average(data, p, test):
     if data['type'] == 'book':
         symbol = data['symbol']
         margin = 10
-        
+
         if symbol == 'XLK':
             margin = 20
 
-        if symbol == 'BABZ' or symbol == 'BABA':
+        if test and symbol == 'BABZ' or symbol == 'BABA':
             margin = 5
 
         if test:
