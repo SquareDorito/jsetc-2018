@@ -5,6 +5,7 @@ class Bot:
 	def __init__(self, exchange, test_mode=True):
 		self.exchange = exchange
 		self.test = test_mode
+		self.conversions = {}
 		self.id = 0
 
 	def write_to_exchange(self, obj):
@@ -29,7 +30,7 @@ class Bot:
 		self.write_to_exchange(order)
 		self.id += 1
 
-	def convert(self, sym, dir, size, buy):
+	def convert(self, sym, size, buy):
 		direction = 'BUY' if buy else 'SELL'
 		order = {
 			'type': 'convert',
@@ -38,10 +39,15 @@ class Bot:
 			'dir': direction,
 			'size': size
 		}
+		self.conversions[self.id] = (sym, size, buy)
 		self.write_to_exchange(order)
 		self.id += 1
 
 	def run(self, data, p):
+		if abs(p.get('XLK')) > 90:
+			direction = p.get('XLK') < 0
+			self.convert('XLK', 30, direction)
+
 		for strategy in strategies:
 			trades = strategy(data, p, False)
 			for trade in trades:

@@ -51,6 +51,7 @@ class Position():
     def update(self, sym, delta):
         self.securities[sym.lower()] += delta
     
+    
     def __repr__(self):
         return str(self.securities)
 
@@ -93,7 +94,25 @@ def main(test_mode, srv):
                 p.update('usd', delta * data['size'] * data['price'])
                 print(p)  
             elif data_type == 'reject':
+                id = data['order_id']
+                if b.conversions.get(id):
+                    del b.conversions[id]
                 print(p)
+            elif data_type == 'ack':
+                id = data['order_id']
+                if b.conversions.get(id):
+                    sym, size, buy = b.conversions[id]
+                    d = 1 if buy else -1
+                    p.update(sym, d * size)
+                    if sym == 'XLK':
+                        p.update('goog', d * -2 * size/10)
+                        p.update('aapl', d * -2 * size/10)
+                        p.update('msft', d * -3 * size/10)
+                        p.update('bond', d * -3 * size/10)
+                    if sym == 'BABA':
+                        p.update('babz', -1 * d * size)
+                    del b.conversions[id]
+
             data = read_from_exchange(exchange)
             data_type = data['type']
 
