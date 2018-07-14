@@ -9,6 +9,7 @@ MIN_COUNT_TO_TRADE = 5 # when do we trust our average?
 MARGIN=10
 
 def adr_pair(data, p, test):
+	valid_symbols = ['XLK', 'GOOG', 'AAPL', 'MSFT', 'BOND']
 	read_data(
 		data, p, test,
 		averageDict,
