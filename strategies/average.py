@@ -3,9 +3,9 @@ from collections import defaultdict
 MIN_COUNT_TO_TRADE = 10 # when do we trust our average?
 averageDict = defaultdict(int)
 totalCountDict = defaultdict(int)
-
-def average(data):
-    read_data(data)
+t
+def average(data, test):
+    read_data(data, test)
     trades = []
     if data['type'] == 'book':
         symbol = data['symbol']
@@ -24,7 +24,7 @@ def average(data):
     #return trades
     return []
 
-def read_data(data):
+def read_data(data, test):
     if data['type'] == 'trade':
         symbol = data['symbol']
         price = data['price']
