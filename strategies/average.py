@@ -15,9 +15,9 @@ def average(data, p, test):
     read_data(data, p, test)
     trades = []
     if data['type'] == 'book':
-        symbol == data['symbol']
+        symbol = data['symbol']
         margin = 5
-        if symbol = 'XLK':
+        if symbol == 'XLK':
             margin = 20
         if test:
             #MARGIN = 2
