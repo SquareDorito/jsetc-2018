@@ -19,7 +19,7 @@ def average(data, p, test):
         symbol = data['symbol']
 
         if test:
-            average = expAverageDict[symbol]
+            average = expAverageDict[symbol] if symbol in expAverageDict else -1
         else:
             average = get_local_average(symbol)
 
