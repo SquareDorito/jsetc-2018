@@ -1,4 +1,4 @@
-from strategies import strategies
+from strategies import strategies, test_strategies
 import json
 
 class Bot:
@@ -28,9 +28,19 @@ class Bot:
 
     def run(self, data):
         for strategy in strategies:
-            trades = strategy(data, self.test)
+            trades = strategy(data, False)
             for trade in trades:
                 if len(trade) == 0:
                     continue
                 sym, price, size, buy = trade
                 self.trade(sym, price, size, buy)
+ 	
+ 	def test_run(self, data):
+        for strategy in test_strategies:
+            trades = strategy(data, True)
+            for trade in trades:
+                if len(trade) == 0:
+                    continue
+                sym, price, size, buy = trade
+                self.trade(sym, price, size, buy)
+

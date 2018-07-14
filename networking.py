@@ -61,7 +61,10 @@ def main(test_mode, srv):
     while True:
         data = read_from_exchange(exchange)
         data_type = data['type']
-        b.run(data)
+        if test_mode:
+            b.test_run(data)
+        else:
+            b.run(data)
         if data_type in ['fill', 'ack', 'reject']:
             print(data)
         if data_type == 'fill':
