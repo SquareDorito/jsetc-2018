@@ -18,15 +18,6 @@ def adr_pair(data, p, test):
 	)
 	trades = []
 
-    #baba is adr, babz is liquid
-
-	# if data['type'] == 'fill' and data['symbol'] == 'BABA':
-	# 	if data['dir']=='BUY':
-	# 		trades.append()
-	# 	elif data['dir']=='SELL':
-	# 		trades.append()
-
-
 	if data['type'] == 'book' and data['symbol'] == 'BABA':
 		bids=data['buy']
 		for price, size in bids:
@@ -46,4 +37,4 @@ def adr_pair(data, p, test):
 				trades.append(('BABZ', price, temp_size, True))
 				trades.append(('BABA', price, temp_size, False))
 
-    return trades
+	return trades
