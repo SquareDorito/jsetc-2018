@@ -4,7 +4,7 @@ MIN_COUNT_TO_TRADE = 10 # when do we trust our average?
 averageDict = defaultdict(int)
 totalCountDict = defaultdict(int)
 
-def rolling_average(data):
+def average(data):
     read_data(data)
     trades = []
     if data['type'] == 'book':
