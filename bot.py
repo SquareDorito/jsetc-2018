@@ -30,18 +30,18 @@ class Bot:
 		self.id += 1
 
 
-	def run(self, data):
+	def run(self, data, p):
 		for strategy in strategies:
-			trades = strategy(data, False)
+			trades = strategy(data, p, False)
 			for trade in trades:
 				if len(trade) == 0:
 					continue
 				sym, price, size, buy = trade
 				self.trade(sym, price, size, buy)
 	
-	def test_run(self, data):
+	def test_run(self, data, p):
 		for strategy in test_strategies:
-			trades = strategy(data, True)
+			trades = strategy(data, p, True)
 			for trade in trades:
 				if len(trade) == 0:
 					continue
