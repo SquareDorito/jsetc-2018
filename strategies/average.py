@@ -67,6 +67,9 @@ def read_data(
         else:
             expAverageDict[symbol] = price
 
+        if test:
+            print symbol + " : " + expAverageDict[symbol]
+
 def get_local_average(symbol):
     if len(windowDict[symbol]) > 0:
         return 1.0 * sum(windowDict[symbol]) / len(windowDict[symbol])
