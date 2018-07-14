@@ -6,6 +6,7 @@
 # 3) Run in loop: while true; do ./bot.py; sleep 1; done
 
 from __future__ import print_function
+from bot import Bot
 
 import sys
 import socket
@@ -23,7 +24,7 @@ test_mode = True
 # 1 is slower
 # 2 is empty
 test_exchange_index=2
-prod_exchange_hostname="empty"
+prod_exchange_hostname="production"
 
 port=25000 + (test_exchange_index if test_mode else 0)
 exchange_hostname = "test-exch-" + team_name if test_mode else prod_exchange_hostname
@@ -41,6 +42,28 @@ def write_to_exchange(exchange, obj):
 def read_from_exchange(exchange):
     return json.loads(exchange.readline())
 
+def buy(exchange, id, sym, price, size):
+    order = {
+        'type': 'add',
+        'order_id': id,
+        'symbol': sym,
+        'dir': 'BUY',
+        'price': price,
+        'size': size,
+    }
+    write_to_exchange(exchange, order)
+
+def sell(exchange, sym, price, size):
+    order = {
+        'type': 'add',
+        'order_id': id,
+        'symbol': sym,
+        'dir': 'SELL',
+        'price': price,
+        'size': size,
+    }
+    write_to_exchange(exchange, order)
+
 
 # ~~~~~============== MAIN LOOP ==============~~~~~
 
@@ -53,6 +76,11 @@ def main():
     # Since many write messages generate marketdata, this will cause an
     # exponential explosion in pending messages. Please, don't do that!
     print("The exchange replied:", hello_from_exchange, file=sys.stderr)
+    b = Bot()
+    while True:
+        data = read_from_exchange(exchange)
+        b.run(data)
+        
 
 if __name__ == "__main__":
     main()
