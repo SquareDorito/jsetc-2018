@@ -91,9 +91,11 @@ def main(test_mode, srv):
         if data_type in ['fill', 'ack', 'reject']:
             print(data)
             if data_type == 'fill':
-                delta = data['size'] * data['price']
+                delta = 1 if data['dir'] == 'SELL' else -1
                 sym = data['symbol']
-                p.update(sym, delta)
+                
+                p.update(sym, -1 * delta * data['size'])
+                p.update('usd', delta * data['size'] * data['price'])
                 print(p)
 
             write_to_exchange(exchange, {"type": "hello", "team": team_name.upper()})
