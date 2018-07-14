@@ -5,9 +5,12 @@ MIN_COUNT_TO_TRADE = 5
 averageDict = defaultdict(int) # averages from the start
 totalCountDict = defaultdict(int) # number of trades
 windowDict = defaultdict(int) # last n prices
+
+XLK_HEDGE = 0
+
 def etf(data, p, test):
 	MARGIN = 30
-	valid_symbols = ['xlk', 'goog', 'aapl', 'msft', 'bond']
+	valid_symbols = ['XLK', 'GOOG', 'AAPL', 'MSFT', 'BOND']
 	read_data(
 		data, p, test, 
 		averageDict, 
@@ -16,21 +19,28 @@ def etf(data, p, test):
 		valid_symbols
 	)
 	trades = []
-	constituents = windowDict['goog'] + windowDict['aapl'] + windowDict['msft'] + 1000
+	constituents = windowDict['GOOG'] + windowDict['AAPL'] + windowDict['MSFT'] + 1000
 	
 	if data['type'] == 'book':
-		symbol = data['symbol'].lower()
-		if symbol == 'xlk':
-			bids = data['buy']
-			asks = data['sell']
-			for price, size in asks:
-				if price - constituents > MARGIN:
-					trades.append((symbol, price, size, False))
-			for price, size in bids:
-				if constituents - price > MARGIN:
-					trades.append((symbol, price, size, True))
 		
-			if abs(10 * data[''] - constituents) > MARGIN:
+		symbol = data['symbol']
+		bids = data['buy']
+		asks = data['sell']
+
+		if symbol == 'XLK':
+			for price, size in asks:
+				if price - constituents > MARGIN and totalCountDict['XLK'] > MIN_COUNT_TO_TRADE:
+					trades.append((symbol, price, size, False))
+					XLK_HEDGE += size
+
+			for price, size in bids:
+				if constituents - price > MARGIN and totalCountDict['XLK'] > MIN_COUNT_TO_TRADE:
+					trades.append((symbol, price, size, True))
+					XLK_HEDGE -= size
+	return trades
+
+		
+
 				
 			
 			
