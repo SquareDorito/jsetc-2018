@@ -33,6 +33,27 @@ def write_to_exchange(exchange, obj):
 
 # ~~~~~============== MAIN LOOP ==============~~~~~
 
+class Position():
+    def __init__(self):
+        self.securities = {
+            'usd': 0,
+            'goog': 0,
+            'aapl': 0,
+            'baba': 0,
+            'babz': 0,
+            'msft': 0,
+            'bond': 0,
+            'xlk': 0
+        }
+    def get(self, sym):
+        return self.securities[sym.lower()]
+    
+    def update(self, sym, delta):
+        self.securities[sym.lower()] += delta
+    
+    def __repr__(self):
+        return str(self.securities)
+
 def main(test_mode, srv):
     # This setting changes which test exchange is connected to.
     # 0 is prod-like
@@ -57,6 +78,7 @@ def main(test_mode, srv):
     # Since many write messages generate marketdata, this will cause an
     # exponential explosion in pending messages. Please, don't do that!
     print("The exchange replied:", hello_from_exchange, file=sys.stderr)
+    p = Position()
     b = Bot(exchange, test_mode)
     while True:
         data = read_from_exchange(exchange)
@@ -65,13 +87,17 @@ def main(test_mode, srv):
             b.test_run(data)
         else:
             b.run(data)
+
         if data_type in ['fill', 'ack', 'reject']:
             print(data)
-        if data_type == 'fill':
-            write_to_exchange(exchange, {"type": "hello", "team": team_name.upper()})
-            hello_from_exchange = read_from_exchange(exchange)
-            print("The exchange replied:", hello_from_exchange, file=sys.stderr)
+            if data_type == 'fill':
+                delta = data['size'] * data['price']
+                sym = data['symbol']
+                p.update(sym, delta)
+                print(p)
 
+            write_to_exchange(exchange, {"type": "hello", "team": team_name.upper()})
+            hello_from_exchange = read_from_exchange(exchange)            
 
 if __name__ == "__main__":
     parser = ArgumentParser('etc')
