@@ -22,7 +22,7 @@ def average(data, p, test):
             average = expAverageDict[symbol]
         else:
             average = get_local_average(symbol)
-            
+
         for price, size in bids:
             if price > average + MARGIN and totalCountDict[symbol] > MIN_COUNT_TO_TRADE:
                 trades.append((symbol, price, size, False))
@@ -64,7 +64,7 @@ def read_data(
         # exponential average
         if symbol in expAverageDict:
             expAverageDict[symbol] = expAverageDict[symbol] * EXP_RATIO + price * (1 - EXP_RATIO)
-        else
+        else:
             expAverageDict[symbol] = price
 
 def get_local_average(symbol):
