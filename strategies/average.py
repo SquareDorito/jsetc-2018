@@ -20,7 +20,8 @@ def average(data, p, test):
 
         if test:
             MARGIN = 10
-            average = expAverageDict[symbol] if symbol in expAverageDict else -1
+            #average = expAverageDict[symbol] if symbol in expAverageDict else -1
+            average = get_local_average(symbol)
         else:
             average = get_local_average(symbol)
 
