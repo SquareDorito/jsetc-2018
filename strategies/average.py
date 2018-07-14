@@ -41,7 +41,7 @@ def read_data(
     averageDict=averageDict,
     totalCountDict=totalCountDict,
     windowDict=windowDict,
-    valid_symbols=['goog','aapl','baba','babz','msft','bond','xlk']
+    valid_symbols=['GOOG','AAPL','BABA','BABZ','MSFT','BOND','XLK']
     ):
     if data['type'] == 'trade':
         symbol = data['symbol']
