@@ -8,6 +8,9 @@ totalCountDict = defaultdict(int)
 WINDOW_SIZE = 10
 windowDict = defaultdict(list)
 
+EXP_RATIO = .5
+expAverageDict = {}
+
 
 def average(data, p, test):
     read_data(data, p, test)
@@ -15,15 +18,18 @@ def average(data, p, test):
     if data['type'] == 'book':
         symbol = data['symbol']
         bids = data['buy']
+        if test:
+            average = expAverageDict[symbol]
+        else:
+            average = get_local_average(symbol)
+            
         for price, size in bids:
-            #if price > averageDict[symbol] + MARGIN and totalCountDict[symbol] > MIN_COUNT_TO_TRADE:
-            if price > get_local_average(symbol) + MARGIN and totalCountDict[symbol] > MIN_COUNT_TO_TRADE:
+            if price > average + MARGIN and totalCountDict[symbol] > MIN_COUNT_TO_TRADE:
                 trades.append((symbol, price, size, False))
 
         asks = data['sell']
         for price, size in asks:
-            #if price < averageDict[symbol] - MARGIN and totalCountDict[symbol] > MIN_COUNT_TO_TRADE:
-            if price < get_local_average(symbol) - MARGIN and totalCountDict[symbol] > MIN_COUNT_TO_TRADE:
+            if price < average - MARGIN and totalCountDict[symbol] > MIN_COUNT_TO_TRADE:
                 trades.append((symbol, price, size, True))
                 
     return trades
@@ -54,6 +60,12 @@ def read_data(
         windowDict[symbol].append(price)
         if len(windowDict[symbol]) > WINDOW_SIZE:
             windowDict[symbol].pop(0)
+
+        # exponential average
+        if symbol in expAverageDict:
+            expAverageDict[symbol] = expAverageDict[symbol] * EXP_RATIO + price * (1 - EXP_RATIO)
+        else
+            expAverageDict[symbol] = price
 
 def get_local_average(symbol):
     if len(windowDict[symbol]) > 0:
