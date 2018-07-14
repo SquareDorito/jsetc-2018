@@ -60,7 +60,8 @@ def main():
     b = Bot(exchange)
     while True:
         data = read_from_exchange(exchange)
-        if data['type'] == 'FILL':
+        data_type = data['type']
+        if data_type in ['fill', 'ack', 'reject']:
             print(data)
         b.run(data)
 
