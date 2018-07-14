@@ -9,7 +9,6 @@ windowDict = defaultdict(list)
 EXP_RATIO = .5
 expAverageDict = {}
 
-
 def average(data, p, test):
     read_data(data, p, test)
     trades = []
@@ -27,6 +26,11 @@ def average(data, p, test):
             average = get_local_average('BABZ')
         else:
             average = get_local_average(symbol)
+
+        if test:
+            average = expAverageDict[symbol]
+            if symbol == 'BABA':
+                average = expAverageDict['BABZ']
 
         bids = data['buy']
         for price, size in bids:
@@ -75,7 +79,9 @@ def read_data(
         else:
             expAverageDict[symbol] = price
 
+
 def get_local_average(symbol, windowDict=windowDict):
     if len(windowDict[symbol]) > 0:
         return 1.0 * sum(windowDict[symbol]) / len(windowDict[symbol])
     return -1
+
