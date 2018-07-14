@@ -1,5 +1,5 @@
 from .simple_bond import simple_bond
 from .average import average
 
-strategies = [simple_bond, average]
+strategies = [simple_bond]
 test_strategies = [average]
