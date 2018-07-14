@@ -68,6 +68,6 @@ def main(test_mode, srv):
 if __name__ == "__main__":
     parser = ArgumentParser('etc')
     parser.add_argument('--test', action='store_true', default=False)
-    parser.add_argument('--serv', action='store_const', default=0)
+    parser.add_argument('--serv', action='store', type=int, default=0)
     args = parser.parse_args()
     main(args.test, args.serv)
