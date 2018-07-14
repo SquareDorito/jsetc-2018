@@ -13,7 +13,7 @@ import json
 
 # ~~~~~============== CONFIGURATION  ==============~~~~~
 # replace REPLACEME with your team name!
-team_name="TEAMJOHNATHAN"
+team_name="TEAMJONATHON"
 # This variable dictates whether or not the bot is connecting to the prod
 # or test exchange. Be careful with this switch!
 test_mode = True
@@ -23,7 +23,7 @@ test_mode = True
 # 1 is slower
 # 2 is empty
 test_exchange_index=2
-prod_exchange_hostname="production"
+prod_exchange_hostname="empty"
 
 port=25000 + (test_exchange_index if test_mode else 0)
 exchange_hostname = "test-exch-" + team_name if test_mode else prod_exchange_hostname
