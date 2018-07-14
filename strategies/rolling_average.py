@@ -9,13 +9,13 @@ def rolling_average(data):
         for price, size in bids:
             rolling_average = get_rolling_average(symbol)
             if price > rolling_average && rolling_average != -1:
-                trades.append(('SELL', symbol, price, size))
+                trades.append((symbol, price, size, false))
 
         asks = data['SELL']
         for price, size in asks:
             rolling_average = get_rolling_average(symbol)
             if price < rolling_average && rolling_average != -1:
-                trades.append(('BUY', symbol, price, size))
+                trades.append((symbol, price, size, true))
                 
     return trades
 
