@@ -16,13 +16,19 @@ def average(data, p, test):
     if data['type'] == 'book':
         symbol = data['symbol']
         margin = 10
+        
         if symbol == 'XLK':
             margin = 20
+
+        if symbol == 'BABZ' or symbol == 'BABA':
+            margin = 5
 
         if test:
             #MARGIN = 2
             #average = expAverageDict[symbol] if symbol in expAverageDict else -1
             average = get_local_average(symbol)
+            # if symbol == 'BABA':
+            #     average = get_local_average('BABZ')
         else:
             average = get_local_average(symbol)
 
