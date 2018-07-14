@@ -5,32 +5,45 @@ MARGIN = 20            # how far from the estimated value should we be to trade?
 averageDict = defaultdict(int)
 totalCountDict = defaultdict(int)
 
-rollingWindowDict = defaultdict(list)
+WINDOW_SIZE = 10
+windowDict = defaultdict(list)
 
 
-def average(data, test):
+def average(data, p, test):
     read_data(data, test)
     trades = []
     if data['type'] == 'book':
         symbol = data['symbol']
         bids = data['buy']
         for price, size in bids:
-            if price > averageDict[symbol] + MARGIN and totalCountDict[symbol] > MIN_COUNT_TO_TRADE:
+            #if price > averageDict[symbol] + MARGIN and totalCountDict[symbol] > MIN_COUNT_TO_TRADE:
+            if price > get_local_average(symbol) + MARGIN and totalCountDict[symbol] > MIN_COUNT_TO_TRADE:
                 trades.append((symbol, price, size, False))
 
         asks = data['sell']
         for price, size in asks:
-            if price < averageDict[symbol] - MARGIN and totalCountDict[symbol] > MIN_COUNT_TO_TRADE:
+            #if price < averageDict[symbol] - MARGIN and totalCountDict[symbol] > MIN_COUNT_TO_TRADE:
+            if price < get_local_average(symbol) - MARGIN and totalCountDict[symbol] > MIN_COUNT_TO_TRADE:
                 trades.append((symbol, price, size, True))
                 
     return trades
 
-def read_data(data, test):
+def read_data(data, p, test):
     if data['type'] == 'trade':
         symbol = data['symbol']
         price = data['price']
+
+        # average
         num_new = data['size']
         num_old = totalCountDict[symbol]
         new_total = num_new + num_old
         averageDict[symbol] = 1.0 * averageDict[symbol] * num_old / new_total + 1.0 * price * num_new / new_total
         totalCountDict[symbol] = new_total
+
+        # local average
+        windowDict[symbol].append(price)
+        if len(windowDict[symbol]) > WINDOW_SIZE:
+            windowDict[symbol].pop(0)
+
+def get_local_average(symbol):
+    return 1.0 * sum(windowDict[symbol]) / len(windowDict[symbol])
