@@ -23,9 +23,10 @@ def average(data, p, test):
         # if test and symbol == 'BABA':
         #     margin = 10
         else:
-            average = get_local_average(symbol)
             if symbol == 'BABA':
                 average = get_local_average('BABZ')
+            else:
+                average = get_local_average(symbol)
 
         bids = data['buy']
         for price, size in bids:
