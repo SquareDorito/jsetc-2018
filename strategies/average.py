@@ -17,7 +17,6 @@ def average(data, p, test):
     trades = []
     if data['type'] == 'book':
         symbol = data['symbol']
-
         if test:
             #MARGIN = 2
             #average = expAverageDict[symbol] if symbol in expAverageDict else -1
