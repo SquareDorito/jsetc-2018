@@ -18,18 +18,15 @@ def average(data, p, test):
     if data['type'] == 'book':
         symbol = data['symbol']
         bids = data['buy']
-        if test:
-            average = expAverageDict[symbol] if symbol in expAverageDict else 0
-        else:
-            average = get_local_average(symbol)
-
         for price, size in bids:
-            if price > average + MARGIN and totalCountDict[symbol] > MIN_COUNT_TO_TRADE:
+            #if price > averageDict[symbol] + MARGIN and totalCountDict[symbol] > MIN_COUNT_TO_TRADE:
+            if price > get_local_average(symbol) + MARGIN and totalCountDict[symbol] > MIN_COUNT_TO_TRADE:
                 trades.append((symbol, price, size, False))
 
         asks = data['sell']
         for price, size in asks:
-            if price < average - MARGIN and totalCountDict[symbol] > MIN_COUNT_TO_TRADE:
+            #if price < averageDict[symbol] - MARGIN and totalCountDict[symbol] > MIN_COUNT_TO_TRADE:
+            if price < get_local_average(symbol) - MARGIN and totalCountDict[symbol] > MIN_COUNT_TO_TRADE:
                 trades.append((symbol, price, size, True))
                 
     return trades
@@ -66,9 +63,6 @@ def read_data(
             expAverageDict[symbol] = expAverageDict[symbol] * EXP_RATIO + price * (1 - EXP_RATIO)
         else:
             expAverageDict[symbol] = price
-
-        if test:
-            print(symbol + " : " + expAverageDict[symbol])
 
 def get_local_average(symbol):
     if len(windowDict[symbol]) > 0:
