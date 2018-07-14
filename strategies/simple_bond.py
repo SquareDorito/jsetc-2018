@@ -1,4 +1,4 @@
-def execute(data):
+def simple_bond(data):
     trades = []
     if data['TYPE'] == 'book' and data['SYMBOL'] == 'BOND':
         bids = data['BUY']
