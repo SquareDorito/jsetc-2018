@@ -5,13 +5,13 @@ def simple_bond(data):
         # print('bids: ', data['buy'])
         for price, size in bids:
             if price > 1000:
-                trades.append(('BOND', price, size, True))
+                trades.append(('BOND', price, size, False))
 
         asks = data['sell']
         # print('asks: ', data['sell'])
         for price, size in asks:
             if price < 1000:
-                trades.append(('BOND', price, size, False))
+                trades.append(('BOND', price, size, True))
 
     if len(trades) > 0:
         print('trades: ', trades)
