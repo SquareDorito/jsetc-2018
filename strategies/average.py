@@ -30,5 +30,3 @@ def read_data(data, test):
         new_total = num_new + num_old
         averageDict[symbol] = 1.0 * averageDict[symbol] * num_old / new_total + 1.0 * price * num_new / new_total
         totalCountDict[symbol] = new_total
-        if test:
-            print(averageDict)
