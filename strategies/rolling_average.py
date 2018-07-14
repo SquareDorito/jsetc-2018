@@ -17,7 +17,8 @@ def rolling_average(data):
             if price < rolling_average && rolling_average != -1:
                 trades.append((symbol, price, size, true))
                 
-    return trades
+    #return trades
+    return []
 
 trade_history = defaultdict(list) # SYMBOL : LIST ((PRICE, SIZE))
 windows = defaultdict(list)       # SYMBOL : LIST (Last WINDOW_SIZE prices) 
@@ -31,6 +32,8 @@ def read_data(data):
         windows[symbol].append(data['PRICE'])
         if len(windows[symbol]) > WINDOW_SIZE:
             windows[symbol].pop(0)
+    print(trade_history)
+    print(windows)
 
 def get_rolling_average(symbol):
     window = windows[symbol]
