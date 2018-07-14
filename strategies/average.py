@@ -1,7 +1,7 @@
 from collections import defaultdict
 
 MIN_COUNT_TO_TRADE = 5 # when do we trust our average?
-MARGIN = 2            # how far from the estimated value should we be to trade?
+MARGIN = 2              # how far from the estimated value should we be to trade?
 averageDict = defaultdict(int)
 totalCountDict = defaultdict(int)
 
@@ -19,7 +19,7 @@ def average(data, p, test):
         symbol = data['symbol']
 
         if test:
-            MARGIN = 2
+            #MARGIN = 2
             #average = expAverageDict[symbol] if symbol in expAverageDict else -1
             average = get_local_average(symbol)
         else:
