@@ -1,4 +1,4 @@
-from .average import read_data
+from .average import read_data, get_local_average
 from collections import defaultdict
 
 MIN_COUNT_TO_TRADE = 5
@@ -19,7 +19,7 @@ def etf(data, p, test):
 		valid_symbols=valid_symbols
 	)
 	trades = []
-	constituents = windowDict['GOOG'] + windowDict['AAPL'] + windowDict['MSFT'] + 1000
+	constituents = get_local_average('GOOG', windowDict) + get_local_average('AAPL', windowDict) + get_local_average('MSFT', windowDict) + 1000
 	
 	if data['type'] == 'book':
 		
