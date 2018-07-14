@@ -11,4 +11,5 @@ def simple_bond(data):
             if price < 1000:
                 trades.append(('BUY', 'BOND', price, size))
 
+    print(trades)
     return trades

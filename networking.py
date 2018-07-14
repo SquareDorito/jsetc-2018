@@ -57,7 +57,6 @@ def main():
     b = Bot(exchange)
     while True:
         data = read_from_exchange(exchange)
-        print(data)
         b.run(data)
 
 
