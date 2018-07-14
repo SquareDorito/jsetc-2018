@@ -24,7 +24,7 @@ test_mode = False
 # 1 is slower
 # 2 is empty
 test_exchange_index=0
-prod_exchange_hostname="empty"
+prod_exchange_hostname="prod-like"
 
 port=25000 + (test_exchange_index if test_mode else 0)
 exchange_hostname = "test-exch-" + team_name if test_mode else prod_exchange_hostname
