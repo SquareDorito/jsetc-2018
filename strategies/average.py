@@ -28,9 +28,19 @@ def average(data, p, test):
                 
     return trades
 
-def read_data(data, p, test):
+def read_data(
+    data,
+    p,
+    test,
+    averageDict=averageDict,
+    totalCountDict=totalCountDict,
+    windowDict=windowDict,
+    valid_symbols=['goog','aapl','baba','babz','msft','bond','xlk']
+    ):
     if data['type'] == 'trade':
         symbol = data['symbol']
+        if symbol not in valid_symbols:
+            return
         price = data['price']
 
         # average

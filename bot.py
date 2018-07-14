@@ -26,7 +26,7 @@ class Bot:
 		}
 		self.write_to_exchange(order)
 		data = self.read_from_exchange()
-		print(data['type'])
+		print('type: ', data['type'])
 		self.id += 1
 
 
