@@ -46,4 +46,6 @@ def read_data(data, p, test):
             windowDict[symbol].pop(0)
 
 def get_local_average(symbol):
-    return 1.0 * sum(windowDict[symbol]) / len(windowDict[symbol])
+    if len(windowDict[symbol]) > 0:
+        return 1.0 * sum(windowDict[symbol]) / len(windowDict[symbol])
+    return -1
