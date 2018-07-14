@@ -1,7 +1,7 @@
 from collections import defaultdict
 
-def rolling_average(data):
-    read_data(data)
+def rolling_average(data, test):
+    read_data(data, test)
     trades = []
     if data['type'] == 'book':
         symbol = data['symbol']
@@ -25,15 +25,16 @@ windows = defaultdict(list)       # SYMBOL : LIST (Last WINDOW_SIZE prices)
 WINDOW_SIZE = 4
 MIN_WINDOW_SIZE = 1
 
-def read_data(data):
+def read_data(data, test):
     if data['type'] == 'trade':
         symbol = data['symbol']
         trade_history[symbol].append((data['price'], data['size']))
         windows[symbol].append(data['price'])
         if len(windows[symbol]) > WINDOW_SIZE:
             windows[symbol].pop(0)
-    print(trade_history)
-    print(windows)
+    if test:
+        print(trade_history)
+        print(windows)
 
 def get_rolling_average(symbol):
     window = windows[symbol]

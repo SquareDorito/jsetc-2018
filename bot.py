@@ -3,8 +3,9 @@ import json
 
 class Bot:
 
-    def __init__(self, exchange):
+    def __init__(self, exchange, test_mode=True):
         self.exchange = exchange
+        self.test = test_mode
         self.id = 0
 
     def write_to_exchange(self, obj):
@@ -27,7 +28,7 @@ class Bot:
 
     def run(self, data):
         for strategy in strategies:
-            trades = strategy(data)
+            trades = strategy(data, self.test)
             for trade in trades:
                 sym, price, size, buy = trade
                 self.trade(sym, price, size, buy)

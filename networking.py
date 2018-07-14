@@ -38,7 +38,9 @@ def main(test_mode, srv):
     # 0 is prod-like
     # 1 is slower
     # 2 is empty
-    test_exchange_index=0
+    if test_mode:
+        print('IN TEST MODE')
+    test_exchange_index=srv
     prod_exchange_hostname="production"
 
     port=25000 + (test_exchange_index if test_mode else 0)
@@ -56,7 +58,7 @@ def main(test_mode, srv):
     # Since many write messages generate marketdata, this will cause an
     # exponential explosion in pending messages. Please, don't do that!
     print("The exchange replied:", hello_from_exchange, file=sys.stderr)
-    b = Bot(exchange)
+    b = Bot(exchange, test_mode)
     while True:
         data = read_from_exchange(exchange)
         data_type = data['type']

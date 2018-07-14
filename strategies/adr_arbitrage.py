@@ -1,2 +1,2 @@
-def adr_arbitrage(data):
+def adr_arbitrage(data, test):
     pass
