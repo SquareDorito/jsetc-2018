@@ -3,7 +3,7 @@ from collections import defaultdict
 
 averageDict = defaultdict(int) # averages from the start
 totalCountDict = defaultdict(int) # number of trades
-windowDict = defaultdict(int) # last n prices
+windowDict = defaultdict(list) # last n prices
 
 MIN_COUNT_TO_TRADE = 5 # when do we trust our average?
 MARGIN=10
