@@ -17,7 +17,7 @@ def etf(data, p, test):
 		valid_symbols=valid_symbols
 	)
 	trades = []
-	constituents = get_local_average('GOOG', windowDict) + get_local_average('AAPL', windowDict) + get_local_average('MSFT', windowDict) + 1000
+	constituents = 2 * get_local_average('GOOG', windowDict) + 2 * get_local_average('AAPL', windowDict) + 3 * get_local_average('MSFT', windowDict) + 3 * 1000
 	constituents = constituents / 10
 	if abs(p.get('XLK')) > 90:
 		direction = p.get('XLK') < 0 # False if we want to sell
