@@ -33,7 +33,10 @@ exchange_hostname = "test-exch-" + team_name if test_mode else prod_exchange_hos
 # ~~~~~============== NETWORKING CODE ==============~~~~~
 def connect():
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    s.connect((exchange_hostname, port))
+    if test_mode:
+        s.connect((exchange_hostname, port))
+    else:
+        s.connect((prod_exchange_hostname, port))
     return s.makefile('rw', 1)
 
 def read_from_exchange(exchange):
