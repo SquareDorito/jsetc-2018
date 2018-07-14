@@ -1,9 +1,11 @@
 from collections import defaultdict
 
 MIN_COUNT_TO_TRADE = 5 # when do we trust our average?
-MARGIN = 10          # how far from the estimated value should we be to trade?
+MARGIN = 20            # how far from the estimated value should we be to trade?
 averageDict = defaultdict(int)
 totalCountDict = defaultdict(int)
+
+rollingWindowDict = defaultdict(list)
 
 
 def average(data, test):
