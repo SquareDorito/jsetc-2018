@@ -11,13 +11,11 @@ def average(data, test):
         symbol = data['symbol']
         bids = data['buy']
         for price, size in bids:
-            rolling_average = get_rolling_average(symbol)
             if price > averageDict[symbol] and totalCountDict[symbol] > MIN_COUNT_TO_TRADE:
                 trades.append((symbol, price, size, False))
 
         asks = data['sell']
         for price, size in asks:
-            rolling_average = get_rolling_average(symbol)
             if price < averageDict[symbol] and totalCountDict[symbol] > MIN_COUNT_TO_TRADE:
                 trades.append((symbol, price, size, True))
                 
