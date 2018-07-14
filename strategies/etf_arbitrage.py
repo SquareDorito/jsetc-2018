@@ -19,6 +19,7 @@ def etf(data, p, test):
 	trades = []
 	constituents = 2 * get_local_average('GOOG', windowDict) + 2 * get_local_average('AAPL', windowDict) + 3 * get_local_average('MSFT', windowDict) + 3 * 1000
 	constituents = constituents / 10
+
 	if abs(p.get('XLK')) > 90:
 		direction = p.get('XLK') < 0 # False if we want to sell
 		print('tons of xlk')
@@ -31,6 +32,8 @@ def etf(data, p, test):
 
 		if symbol == 'XLK':
 			for price, size in asks:
+				print(constituents, price, 'LOOK HERE')
+
 				if price - constituents > MARGIN and totalCountDict['XLK'] > MIN_COUNT_TO_TRADE:
 					trades.append((symbol, price, size, False))
 					# XLK_HEDGE += size
