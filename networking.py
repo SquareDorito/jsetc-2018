@@ -92,6 +92,8 @@ def main(test_mode, srv):
                 p.update(sym, -1 * delta * data['size'])
                 p.update('usd', delta * data['size'] * data['price'])
                 print(p)  
+            elif data_type == 'reject':
+                print(p)
             data = read_from_exchange(exchange)
             data_type = data['type']
 
