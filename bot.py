@@ -24,7 +24,7 @@ class Bot:
 			'price': price,
 			'size': size,
 		}
-		if self.test_mode
+		if self.test_mode:
 			print(order)
 		self.write_to_exchange(order)
 		self.id += 1
