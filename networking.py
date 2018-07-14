@@ -7,6 +7,7 @@
 
 from __future__ import print_function
 from bot import Bot
+from argparse import ArgumentParser
 
 import sys
 import socket
@@ -24,7 +25,7 @@ test_mode = False
 # 1 is slower
 # 2 is empty
 test_exchange_index=0
-prod_exchange_hostname="empty"
+prod_exchange_hostname="production"
 
 port=25000 + (test_exchange_index if test_mode else 0)
 exchange_hostname = "test-exch-" + team_name if test_mode else prod_exchange_hostname
@@ -35,35 +36,12 @@ def connect():
     s.connect((exchange_hostname, port))
     return s.makefile('rw', 1)
 
-def write_to_exchange(exchange, obj):
-    json.dump(obj, exchange)
-    exchange.write("\n")
-
 def read_from_exchange(exchange):
     return json.loads(exchange.readline())
 
-def buy(exchange, id, sym, price, size):
-    order = {
-        'type': 'add',
-        'order_id': id,
-        'symbol': sym,
-        'dir': 'BUY',
-        'price': price,
-        'size': size,
-    }
-    write_to_exchange(exchange, order)
-
-def sell(exchange, sym, price, size):
-    order = {
-        'type': 'add',
-        'order_id': id,
-        'symbol': sym,
-        'dir': 'SELL',
-        'price': price,
-        'size': size,
-    }
-    write_to_exchange(exchange, order)
-
+def write_to_exchange(exchange, obj):
+        json.dump(obj, exchange)
+        exchange.write("\n")
 
 # ~~~~~============== MAIN LOOP ==============~~~~~
 
@@ -76,7 +54,7 @@ def main():
     # Since many write messages generate marketdata, this will cause an
     # exponential explosion in pending messages. Please, don't do that!
     print("The exchange replied:", hello_from_exchange, file=sys.stderr)
-    b = Bot()
+    b = Bot(exchange)
     while True:
         data = read_from_exchange(exchange)
         print(data)
