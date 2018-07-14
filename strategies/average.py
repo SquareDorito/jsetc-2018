@@ -1,7 +1,6 @@
 from collections import defaultdict
 
 MIN_COUNT_TO_TRADE = 5 # when do we trust our average?
-MARGIN = 2              # how far from the estimated value should we be to trade?
 averageDict = defaultdict(int)
 totalCountDict = defaultdict(int)
 
@@ -17,6 +16,9 @@ def average(data, p, test):
     trades = []
     if data['type'] == 'book':
         symbol = data['symbol']
+        margin = 5
+        if symbol = 'XLK':
+            margin = 20
         if test:
             #MARGIN = 2
             #average = expAverageDict[symbol] if symbol in expAverageDict else -1
@@ -27,13 +29,13 @@ def average(data, p, test):
         bids = data['buy']
         for price, size in bids:
             #if price > averageDict[symbol] + MARGIN and totalCountDict[symbol] > MIN_COUNT_TO_TRADE:
-            if price > average + MARGIN and totalCountDict[symbol] > MIN_COUNT_TO_TRADE:
+            if price > average + margin and totalCountDict[symbol] > MIN_COUNT_TO_TRADE:
                 trades.append((symbol, price, size, False))
 
         asks = data['sell']
         for price, size in asks:
             #if price < averageDict[symbol] - MARGIN and totalCountDict[symbol] > MIN_COUNT_TO_TRADE:
-            if price < average - MARGIN and totalCountDict[symbol] > MIN_COUNT_TO_TRADE:
+            if price < average - margin and totalCountDict[symbol] > MIN_COUNT_TO_TRADE:
                 trades.append((symbol, price, size, True))
                 
     return trades
