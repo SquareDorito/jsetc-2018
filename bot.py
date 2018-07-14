@@ -2,7 +2,6 @@ from strategies import strategies, test_strategies
 import json
 
 class Bot:
-
 	def __init__(self, exchange, test_mode=True):
 		self.exchange = exchange
 		self.test = test_mode
@@ -12,6 +11,9 @@ class Bot:
 		json.dump(obj, self.exchange)
 		self.exchange.write("\n")
 	
+	def read_from_exchange(self):
+		return json.loads(self.exchange.readline())
+
 	def trade(self, sym, price, size, buy):
 		direction = 'BUY' if buy else 'SELL'
 		order = {
@@ -23,6 +25,8 @@ class Bot:
 			'size': size,
 		}
 		self.write_to_exchange(order)
+		data = self.read_from_exchange()
+		print(data['type'])
 		self.id += 1
 
 
