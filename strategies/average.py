@@ -10,7 +10,7 @@ windowDict = defaultdict(list)
 
 
 def average(data, p, test):
-    read_data(data, test)
+    read_data(data, p, test)
     trades = []
     if data['type'] == 'book':
         symbol = data['symbol']
