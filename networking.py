@@ -61,9 +61,13 @@ def main(test_mode, srv):
     while True:
         data = read_from_exchange(exchange)
         data_type = data['type']
+        b.run(data)
         if data_type in ['fill', 'ack', 'reject']:
             print(data)
-        b.run(data)
+        if data_type == 'fill':
+            write_to_exchange(exchange, {"type": "hello", "team": team_name.upper()})
+            hello_from_exchange = read_from_exchange(exchange)
+            print("The exchange replied:", hello_from_exchange, file=sys.stderr)
 
 
 if __name__ == "__main__":
