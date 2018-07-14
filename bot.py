@@ -1,4 +1,4 @@
-from strategies
+from strategies import simple_bond
 
 class Bot:
 
@@ -6,3 +6,4 @@ class Bot:
         pass
 
     def run(self, data):
+        simple_bond.execute(data)
