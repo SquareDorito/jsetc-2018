@@ -10,7 +10,7 @@ class Bot:
 
     def write_to_exchange(self, obj):
     	json.dump(obj, self.exchange)
-        self.exchange.write("\n")
+    	self.exchange.write("\n")
     
     def trade(self, sym, price, size, buy):
         direction = 'BUY' if buy else 'SELL'
