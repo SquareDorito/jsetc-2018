@@ -31,8 +31,9 @@ def average(data, p, test):
             average = get_local_average(symbol)
 
 
-        if symbol=='BABA' or symbol=='BABZ':
-            return []
+        #if symbol=='BABA' or symbol=='BABZ':
+        #    return []
+        
         # if test:
         #     average = expAverageDict[symbol]
         #     if symbol == 'BABA':
