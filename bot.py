@@ -20,7 +20,6 @@ class Bot:
 	def trade(self, sym, price, size, buy):
 		if sym == 'XLK':
 			if self.limits[sym][0 if buy else 1] + size > 100:
-				print('rejected order', self.limits[sym])
 				return 
 			else:
 				self.limits[sym][0 if buy else 1] += size
