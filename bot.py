@@ -8,6 +8,7 @@ class Bot:
 		self.conversions = {}
 		self.limits = {'XLK': [0, 0], 'BABA': [0, 0]}
 		self.xlks={}
+		self.=[]
 		self.id = 0
 
 	def write_to_exchange(self, obj):
@@ -42,8 +43,7 @@ class Bot:
 		self.id += 1
 
 	def convert(self, sym, size, buy):
-		if len(self.conversions) > 0:
-			return
+		print('entered convert')
 		direction = 'BUY' if buy else 'SELL'
 		order = {
 			'type': 'convert',
@@ -65,7 +65,7 @@ class Bot:
 
 		if abs(p.get('XLK')) > 90:
 			direction = p.get('XLK') < 0
-			self.convert('XLK', 50, direction)
+			self.convert('XLK', 30, direction)
 
 		for strategy in strategies:
 			trades = strategy(data, p, False)
