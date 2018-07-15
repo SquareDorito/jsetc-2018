@@ -8,7 +8,8 @@ class Bot:
 		self.conversions = {}
 		self.limits = {'XLK': [0, 0], 'BABA': [0, 0]}
 		self.xlks={}
-		self.=[]
+		self.adr_fills_buys=[]
+		self.adr_fills_sells=[]
 		self.id = 0
 
 	def write_to_exchange(self, obj):
