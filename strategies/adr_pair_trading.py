@@ -6,7 +6,7 @@ totalCountDict = defaultdict(int) # number of trades
 windowDict = defaultdict(list) # last n prices
 
 MIN_COUNT_TO_TRADE = 5 # when do we trust our average?
-MARGIN=10
+MARGIN=20
 
 def adr_pair(data, p, test):
 	valid_symbols = ['BABA', 'BABZ']
