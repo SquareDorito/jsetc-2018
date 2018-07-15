@@ -18,14 +18,13 @@ class Bot:
 		return json.loads(self.exchange.readline())
 
 	def trade(self, sym, price, size, buy):
-		if self.test:
-			if sym == 'XLK':
-				if self.limits[sym][0 if buy else 1] + size > 100:
-					# rejects orders that block
-					return
-				else:
-					self.limits[sym][0 if buy else 1] += size
-					self.xlks[self.id] = True
+		if sym == 'XLK':
+			if self.limits[sym][0 if buy else 1] + size > 100:
+				# rejects orders that block
+				return
+			else:
+				self.limits[sym][0 if buy else 1] += size
+				self.xlks[self.id] = True
 
 		direction = 'BUY' if buy else 'SELL'
 		order = {
@@ -43,6 +42,7 @@ class Bot:
 
 	def convert(self, sym, size, buy):
 		if len(self.conversions) > 0:
+			print('excess conversions')
 			return
 		direction = 'BUY' if buy else 'SELL'
 		order = {
@@ -59,7 +59,7 @@ class Bot:
 		self.id += 1
 
 	def run(self, data, p):
-		if abs(p.get('BABA'))+abs(p.get('BABZ'))==20:
+		if abs(p.get('BABA')) + abs(p.get('BABZ'))==20:
 			direction = p.get('BABA')<0
 			self.convert('BABA',10, direction)
 
