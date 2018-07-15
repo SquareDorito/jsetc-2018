@@ -84,7 +84,7 @@ class Bot:
 		for strategy in test_strategies:
 			#print(strategy)
 			trades = strategy(data, p, True)
-			print(trades)
+			# print(trades)
 			for trade in trades:
 				if len(trade) == 0:
 					continue
