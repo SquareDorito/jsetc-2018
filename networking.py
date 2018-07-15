@@ -96,7 +96,7 @@ def main(test_mode, srv):
                 
                 p.update(sym, -1 * delta * data['size'])
                 p.update('usd', delta * data['size'] * data['price'])
-                # print(p)  
+                print(p)  
             elif data_type == 'reject':
                 id = data['order_id']
                 if b.conversions.get(id):
