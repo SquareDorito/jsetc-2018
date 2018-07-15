@@ -27,6 +27,13 @@ class Bot:
 			else:
 				self.limits[sym][0 if buy else 1] += size
 				self.xlks[self.id] = True
+		if sym == 'BABA':
+			if self.limits[sym][0 if buy else 1] + size > 10:
+				# rejects orders that block
+				return
+			else:
+				self.limits[sym][0 if buy else 1] += size
+				self.xlks[self.id] = True
 
 		direction = 'BUY' if buy else 'SELL'
 		order = {
