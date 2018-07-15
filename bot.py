@@ -61,6 +61,7 @@ class Bot:
 			self.convert('BABA',10, direction)
 
 		if abs(p.get('XLK')) > 90:
+			print('over limit')
 			direction = p.get('XLK') < 0
 			self.convert('XLK', 30, direction)
 
