@@ -41,6 +41,7 @@ class Bot:
 		self.id += 1
 
 	def convert(self, sym, size, buy):
+		print('entered convert')
 		direction = 'BUY' if buy else 'SELL'
 		order = {
 			'type': 'convert',
@@ -61,7 +62,6 @@ class Bot:
 			self.convert('BABA',10, direction)
 		
 		if abs(p.get('XLK')) > 90:
-			
 			direction = p.get('XLK') < 0
 			self.convert('XLK', 30, direction)
 
