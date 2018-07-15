@@ -49,7 +49,7 @@ def adr_pair(data, p, test):
 				trades.append('BABZ',buffered_sells,False)
 				break
 			else:
-				trades.append('BABZ',size,False)
+				trades.append(('BABZ',size,False))
 				buffered_sells-=size
 
 		asks=data['sell']
@@ -58,8 +58,7 @@ def adr_pair(data, p, test):
 				trades.append('BABZ',buffered_buys,True)
 				break
 			else:
-				trades.append('BABZ',size,True)
+				trades.append(('BABZ',size,True))
 				buffered_buys-=size
-
 
 	return trades
