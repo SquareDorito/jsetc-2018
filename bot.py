@@ -8,6 +8,8 @@ class Bot:
 		self.conversions = {}
 		self.limits = {'XLK': [0, 0], 'BABA': [0, 0]}
 		self.xlks={}
+		self.adr_fills_buys=[]
+		self.adr_fills_sells=[]
 		self.id = 0
 
 	def write_to_exchange(self, obj):
@@ -65,7 +67,7 @@ class Bot:
 
 		if abs(p.get('XLK')) > 90:
 			direction = p.get('XLK') < 0
-			self.convert('XLK', 50, direction)
+			self.convert('XLK', 30, direction)
 
 		for strategy in strategies:
 			trades = strategy(data, p, False)
@@ -80,7 +82,7 @@ class Bot:
 			direction = p.get('BABA')<0
 			self.convert('BABA',10, direction)
 
-		print(p.get('XLK'))
+		#print(p.get('XLK'))
 		if abs(p.get('XLK')) > 90:
 			print('over limit')
 			direction = p.get('XLK') < 0
