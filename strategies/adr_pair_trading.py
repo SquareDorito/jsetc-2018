@@ -45,6 +45,7 @@ def adr_pair(data, p, test):
 	if data['type'] == 'book' and data['symbol'] == 'BABZ':
 		bids=data['buy']
 		for price, size in bids:
+			print(buffered_sells)
 			if size>buffered_sells:
 				trades.append(('BABZ',price,buffered_sells,False))
 				break
@@ -54,6 +55,7 @@ def adr_pair(data, p, test):
 
 		asks=data['sell']
 		for price, size in asks:
+			print(buffered_buys)
 			if size>buffered_buys:
 				trades.append(('BABZ',price,buffered_buys,True))
 				break
