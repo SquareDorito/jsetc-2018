@@ -48,7 +48,7 @@ def etf(data, p, test):
 				for price, m_size in market:
 					if size == 0:
 						break
-					trades.append((symbol, price, min(size, m_size), direction))
+					trades.append((symbol, price, int(min(size, m_size)), direction))
 					size -= min(size, m_size)
 				p.diff[symbol.lower()] = sign * size
 
