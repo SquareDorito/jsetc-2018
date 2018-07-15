@@ -42,7 +42,8 @@ class Bot:
 		self.id += 1
 
 	def convert(self, sym, size, buy):
-		print('entered convert')
+		if len(self.conversions) > 0:
+			return
 		direction = 'BUY' if buy else 'SELL'
 		order = {
 			'type': 'convert',
@@ -64,7 +65,7 @@ class Bot:
 		
 		if abs(p.get('XLK')) > 90:
 			direction = p.get('XLK') < 0
-			self.convert('XLK', 30, direction)
+			self.convert('XLK', 50, direction)
 
 		for strategy in strategies:
 			trades = strategy(data, p, False)
