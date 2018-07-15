@@ -66,6 +66,7 @@ class Bot:
 
 		for strategy in strategies:
 			trades = strategy(data, p, False)
+			print(trades)
 			for trade in trades:
 				print(trade)
 				if len(trade) == 0:
