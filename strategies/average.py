@@ -60,6 +60,7 @@ def read_data(
     averageDict=averageDict,
     totalCountDict=totalCountDict,
     windowDict=windowDict,
+    expAverageDict=expAverageDict,
     valid_symbols=['GOOG','AAPL','BABA','BABZ','MSFT','BOND','XLK']
     ):
     if data['type'] == 'trade':
@@ -93,8 +94,8 @@ def read_data(
 
 
 def get_local_average(symbol, windowDict=windowDict):
-    # if test:
-    #     return expAverageDict[symbol]
+
+    # return expAverageDict[symbol]
     if len(windowDict[symbol]) > 0:
         return 1.0 * sum(windowDict[symbol]) / len(windowDict[symbol])
     return -1
