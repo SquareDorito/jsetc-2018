@@ -45,6 +45,16 @@ class Position():
             'bond': 0,
             'xlk': 0
         }
+        self.diff = {
+            'usd': 0,
+            'goog': 0,
+            'aapl': 0,
+            'baba': 0,
+            'babz': 0,
+            'msft': 0,
+            'bond': 0,
+            'xlk': 0
+        }
     def get(self, sym):
         return self.securities[sym.lower()]
     
@@ -90,6 +100,7 @@ def main(test_mode, srv):
                 # check if an xlk order went through
                 if b.xlks.get(data['order_id']):
                     b.limits['XLK'][0 if data['dir'] == 'BUY' else 1] -= data['size']
+                    p.diff['XLK'] += (1 if data['dir'] == 'BUY' else -1 ) * data['size']
 
                 delta = 1 if data['dir'] == 'SELL' else -1
                 sym = data['symbol']

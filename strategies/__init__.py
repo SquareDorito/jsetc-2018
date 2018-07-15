@@ -4,4 +4,4 @@ from .etf_arbitrage import etf
 from .adr_pair_trading import adr_pair
 
 strategies = [simple_bond, average, etf]
-test_strategies = [etf]
+test_strategies = [etf, simple_bond, average]
