@@ -22,7 +22,7 @@ def adr_pair(data, p, test):
 	if data['type'] == 'book' and data['symbol'] == 'BABA':
 		bids=data['buy']
 		for price, size in bids:
-			if price>get_local_average('BABZ')+MARGIN and totalCountDict['BABZ'] > total:
+			if price>get_local_average('BABZ')+MARGIN and totalCountDict['BABZ'] > MIN_COUNT_TO_TRADE:
 				if p.get('baba')<=-10:
 					break
 				temp_size=size if p.get('baba')-size>=-10 else p.get('baba')+10
@@ -30,7 +30,7 @@ def adr_pair(data, p, test):
 
 		asks=data['sell']
 		for price, size in asks:
-			if price<get_local_average('BABZ')-MARGIN and totalCountDict['BABZ'] > total:
+			if price<get_local_average('BABZ')-MARGIN and totalCountDict['BABZ'] > MIN_COUNT_TO_TRADE:
 				if p.get('baba')>=10:
 					break
 				temp_size=size if p.get('baba')+size<=10 else 10-p.get('baba')
