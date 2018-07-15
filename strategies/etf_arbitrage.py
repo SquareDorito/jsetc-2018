@@ -28,7 +28,6 @@ def etf(data, p, test):
 		asks = data['sell']
 		if test:
 			if abs(p.diff['xlk']) > 10:
-				print
 				diff = 10 * (p.diff['xlk'] // 10)
 				if diff < 0:
 					diff += 10
@@ -37,7 +36,7 @@ def etf(data, p, test):
 				p.diff['msft'] -= 3 * diff
 				p.diff['bond'] -= 3 * diff
 				p.diff['xlk'] -= diff
-			
+				print('THIS IS WHERE THE DIFF IS CALCULATED', p.diff)
 			if symbol in valid_symbols[1:]:
 				if p.diff[symbol.lower()] != 0:
 					size = p.diff[symbol.lower()]
@@ -49,7 +48,7 @@ def etf(data, p, test):
 					for price, m_size in market:
 						if size == 0:
 							break
-						trades.append((symbol, price, max(size, m_size)))
+						trades.append((symbol, price, max(size, m_size), direction))
 						size -= max(size, m_size)
 					p.diff[symbol.lower()] = sign * size
 
