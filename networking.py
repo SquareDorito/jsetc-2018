@@ -87,6 +87,10 @@ def main(test_mode, srv):
         while data_type in ['fill', 'ack', 'reject']:
             print(data)
             if data_type == 'fill':
+                # check if an xlk order went through
+                if b.xlks.get(data['order_id']):
+                    b.limits['XLK'][0 if data['dir'] == 'BUY' else 1] -= data['size']
+
                 delta = 1 if data['dir'] == 'SELL' else -1
                 sym = data['symbol']
                 

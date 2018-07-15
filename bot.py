@@ -6,6 +6,8 @@ class Bot:
 		self.exchange = exchange
 		self.test = test_mode
 		self.conversions = {}
+		self.limits = {'XLK': [0, 0], 'BABA': [0, 0]}
+		self.xlks = {}
 		self.id = 0
 
 	def write_to_exchange(self, obj):
@@ -16,6 +18,14 @@ class Bot:
 		return json.loads(self.exchange.readline())
 
 	def trade(self, sym, price, size, buy):
+		if sym == 'XLK':
+			if self.limits[sym][0 if buy else 1] + size > 100:
+				print('rejected order', self.limits[sym])
+				return 
+			else:
+				self.limits[sym][0 if buy else 1] += size
+				self.xlks[self.id] = True
+
 		direction = 'BUY' if buy else 'SELL'
 		order = {
 			'type': 'add',
