@@ -7,7 +7,7 @@ totalCountDict = defaultdict(int) # number of trades
 windowDict = defaultdict(list) # last n prices
 
 def etf(data, p, test):
-	MARGIN = 15
+	MARGIN = 30
 	valid_symbols = ['XLK', 'GOOG', 'AAPL', 'MSFT', 'BOND']
 	read_data(
 		data, p, test, 
@@ -26,7 +26,7 @@ def etf(data, p, test):
 		symbol = data['symbol']
 		bids = data['buy']
 		asks = data['sell']
-		
+
 		if abs(p.diff['xlk']) > 10:
 			diff = 10 * (p.diff['xlk'] // 10)
 			if diff < 0:
