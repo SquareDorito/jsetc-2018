@@ -7,8 +7,11 @@ class Bot:
 		self.test = test_mode
 		self.conversions = {}
 		self.limits = {'XLK': [0, 0], 'BABA': [0, 0]}
-		self.xlks = {}
+		self.adr=[]
 		self.id = 0
+
+	def adr_response(data):
+
 
 	def write_to_exchange(self, obj):
 		json.dump(obj, self.exchange)

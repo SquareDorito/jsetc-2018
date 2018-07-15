@@ -47,11 +47,11 @@ class Position():
         }
     def get(self, sym):
         return self.securities[sym.lower()]
-    
+
     def update(self, sym, delta):
         self.securities[sym.lower()] += delta
-    
-    
+
+
     def __repr__(self):
         return str(self.securities)
 
@@ -71,7 +71,7 @@ def main(test_mode, srv):
         exchange = connect('test-exch-' + team_name, port)
     else:
         exchange = connect('production', 25000)
-    
+
     write_to_exchange(exchange, {"type": "hello", "team": team_name.upper()})
     hello_from_exchange = read_from_exchange(exchange)
     # A common mistake people make is to call write_to_exchange() > 1
@@ -87,16 +87,17 @@ def main(test_mode, srv):
         while data_type in ['fill', 'ack', 'reject']:
             print(data)
             if data_type == 'fill':
+                if data['symbol']=='BABA':
                 # check if an xlk order went through
                 if b.xlks.get(data['order_id']):
                     b.limits['XLK'][0 if data['dir'] == 'BUY' else 1] -= data['size']
 
                 delta = 1 if data['dir'] == 'SELL' else -1
                 sym = data['symbol']
-                
+
                 p.update(sym, -1 * delta * data['size'])
                 p.update('usd', delta * data['size'] * data['price'])
-                print(p)  
+                print(p)
             elif data_type == 'reject':
                 id = data['order_id']
                 if b.conversions.get(id):
@@ -124,7 +125,7 @@ def main(test_mode, srv):
             b.test_run(data, p)
         else:
             b.run(data, p)
-     
+
 
 if __name__ == "__main__":
     parser = ArgumentParser('etc')
