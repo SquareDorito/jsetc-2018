@@ -21,7 +21,7 @@ class Bot:
 		# if sym == 'XLK':
 		# 	if self.limits[sym][0 if buy else 1] + size > 100:
 		# 		print('rejected order', self.limits[sym])
-		# 		return 
+		# 		return
 		# 	else:
 		# 		self.limits[sym][0 if buy else 1] += size
 		# 		self.xlks[self.id] = True
