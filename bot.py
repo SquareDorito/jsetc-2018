@@ -13,7 +13,7 @@ class Bot:
 	def write_to_exchange(self, obj):
 		json.dump(obj, self.exchange)
 		self.exchange.write("\n")
-	
+
 	def read_from_exchange(self):
 		return json.loads(self.exchange.readline())
 
@@ -56,6 +56,10 @@ class Bot:
 		self.id += 1
 
 	def run(self, data, p):
+		if abs(p.get('BABA'))+abs(p.get('BABZ'))==20:
+			direction = p.get('BABA')<0
+			self.convert('BABA',10, direction)
+
 		if abs(p.get('XLK')) > 90:
 			direction = p.get('XLK') < 0
 			self.convert('XLK', 30, direction)
@@ -67,7 +71,7 @@ class Bot:
 					continue
 				sym, price, size, buy = trade
 				self.trade(sym, price, size, buy)
-	
+
 	def test_run(self, data, p):
 		for strategy in test_strategies:
 			trades = strategy(data, p, True)
@@ -76,4 +80,3 @@ class Bot:
 					continue
 				sym, price, size, buy = trade
 				self.trade(sym, price, size, buy)
-
