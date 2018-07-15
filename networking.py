@@ -55,6 +55,8 @@ class Position():
             'bond': 0,
             'xlk': 0
         }
+        self.buffered_sells=0
+        self.buffered_buys=0
     def get(self, sym):
         return self.securities[sym.lower()]
 
