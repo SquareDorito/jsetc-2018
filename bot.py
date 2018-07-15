@@ -21,13 +21,14 @@ class Bot:
 		return json.loads(self.exchange.readline())
 
 	def trade(self, sym, price, size, buy):
-		# if sym == 'XLK':
-		# 	if self.limits[sym][0 if buy else 1] + size > 100:
-		# 		print('rejected order', self.limits[sym])
-		# 		return
-		# 	else:
-		# 		self.limits[sym][0 if buy else 1] += size
-		# 		self.xlks[self.id] = True
+		if self.test:
+			if sym == 'XLK':
+				if self.limits[sym][0 if buy else 1] + size > 100:
+					# rejects orders that block
+					return
+				else:
+					self.limits[sym][0 if buy else 1] += size
+					self.xlks[self.id] = True
 
 		direction = 'BUY' if buy else 'SELL'
 		order = {
