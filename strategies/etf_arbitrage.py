@@ -36,7 +36,7 @@ def etf(data, p, test):
 				p.diff['msft'] -= 3 * diff
 				p.diff['bond'] -= 3 * diff
 				p.diff['xlk'] -= diff
-			print('THIS IS WHERE THE DIFF IS CALCULATED', p.diff)
+				print('THIS IS WHERE THE DIFF IS CALCULATED', p.diff)
 			if symbol in valid_symbols[1:]:
 				if p.diff[symbol.lower()] != 0:
 					size = p.diff[symbol.lower()]
