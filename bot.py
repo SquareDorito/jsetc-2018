@@ -84,6 +84,7 @@ class Bot:
 			self.convert('XLK', 30, direction)
 
 		for strategy in test_strategies:
+			print(strategy)
 			trades = strategy(data, p, True)
 			for trade in trades:
 				if len(trade) == 0:
