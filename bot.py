@@ -10,9 +10,6 @@ class Bot:
 		self.adr=[]
 		self.id = 0
 
-	def adr_response(data):
-
-
 	def write_to_exchange(self, obj):
 		json.dump(obj, self.exchange)
 		self.exchange.write("\n")
@@ -64,7 +61,7 @@ class Bot:
 		if abs(p.get('BABA'))+abs(p.get('BABZ'))==20:
 			direction = p.get('BABA')<0
 			self.convert('BABA',10, direction)
-		
+
 		if abs(p.get('XLK')) > 90:
 			direction = p.get('XLK') < 0
 			self.convert('XLK', 30, direction)
