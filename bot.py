@@ -21,7 +21,7 @@ class Bot:
 		if self.test:
 			if sym == 'XLK':
 				if self.limits[sym][0 if buy else 1] + size > 100:
-					print('rejected order', self.limits[sym])
+					# rejects orders that block
 					return
 				else:
 					self.limits[sym][0 if buy else 1] += size
