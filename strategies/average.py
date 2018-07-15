@@ -10,6 +10,7 @@ EXP_RATIO = .5
 expAverageDict = {}
 
 localAverageDict = defaultdict(list)
+count = 0;
 
 def average(data, p, test):
     read_data(data, p, test)
@@ -81,7 +82,8 @@ def read_data(
         else:
             expAverageDict[symbol] = price
 
-        if len(localAverageDict[symbol]) % 10 == 0:
+        count += 1
+        if count % 10 == 0:
             localAverageDict[symbol].append(get_local_average(symbol))
             print(symbol)
             print(localAverageDict[symbol])
