@@ -40,7 +40,8 @@ def adr_pair(data, p, test):
 
 
 	if data['type'] == 'book' and data['symbol'] == 'BABZ':
-		print(p.buffered_sells,p.buffered_buys)
+		if p.buffered_buys!=0 or p.buffered_sells!=0:
+			print(p.buffered_sells,p.buffered_buys)
 		bids=data['buy']
 		for price, size in bids:
 
