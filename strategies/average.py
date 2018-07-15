@@ -33,7 +33,7 @@ def average(data, p, test):
 
         #if symbol=='BABA' or symbol=='BABZ':
         #    return []
-        
+
         # if test:
         #     average = expAverageDict[symbol]
         #     if symbol == 'BABA':
@@ -82,10 +82,10 @@ def read_data(
             windowDict[symbol].pop(0)
 
         # exponential average
-        if symbol in expAverageDict:
-            expAverageDict[symbol] = expAverageDict[symbol] * EXP_RATIO + price * (1 - EXP_RATIO)
-        else:
-            expAverageDict[symbol] = price
+        # if symbol in expAverageDict:
+        #     expAverageDict[symbol] = expAverageDict[symbol] * EXP_RATIO + price * (1 - EXP_RATIO)
+        # else:
+        #     expAverageDict[symbol] = price
 
         localAverageDict[symbol].append(get_local_average(symbol))
         # if test:
