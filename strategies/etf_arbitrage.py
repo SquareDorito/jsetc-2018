@@ -21,13 +21,14 @@ def etf(data, p, test):
 		return trades
 	constituents = 2 * get_local_average('GOOG', windowDict) + 2 * get_local_average('AAPL', windowDict) + 3 * get_local_average('MSFT', windowDict) + 3 * 1000
 	constituents = constituents / 10
-	if test:
-		if data['type'] == 'book':
-			symbol = data['symbol']
-			bids = data['buy']
-			asks = data['sell']
+	
+	if data['type'] == 'book':
+		symbol = data['symbol']
+		bids = data['buy']
+		asks = data['sell']
+		if test:
 			if abs(p.diff['xlk']) > 10:
-				print(p.diff)
+				print
 				diff = 10 * (p.diff['xlk'] // 10)
 				if diff < 0:
 					diff += 10
