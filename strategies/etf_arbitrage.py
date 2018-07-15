@@ -31,10 +31,10 @@ def etf(data, p, test):
 				diff = 10 * (p.diff['xlk'] // 10)
 				if diff < 0:
 					diff += 10
-				p.diff['goog'] -= 2 * diff
-				p.diff['aapl'] -= 2 * diff
-				p.diff['msft'] -= 3 * diff
-				p.diff['bond'] -= 3 * diff
+				p.diff['goog'] -= 2 * diff / 10
+				p.diff['aapl'] -= 2 * diff / 10
+				p.diff['msft'] -= 3 * diff / 10 
+				p.diff['bond'] -= 3 * diff / 10
 				p.diff['xlk'] -= diff
 				print('THIS IS WHERE THE DIFF IS CALCULATED', p.diff)
 			if symbol in valid_symbols[1:]:
