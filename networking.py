@@ -85,7 +85,7 @@ def main(test_mode, srv):
         data = read_from_exchange(exchange)
         data_type = data['type']
         while data_type in ['fill', 'ack', 'reject']:
-            print(data)
+            # print(data)
             if data_type == 'fill':
                 # check if an xlk order went through
                 if b.xlks.get(data['order_id']):
@@ -96,12 +96,12 @@ def main(test_mode, srv):
                 
                 p.update(sym, -1 * delta * data['size'])
                 p.update('usd', delta * data['size'] * data['price'])
-                print(p)  
+                # print(p)  
             elif data_type == 'reject':
                 id = data['order_id']
                 if b.conversions.get(id):
                     del b.conversions[id]
-                print(p)
+                # print(p)
             elif data_type == 'ack':
                 id = data['order_id']
                 if b.conversions.get(id):
