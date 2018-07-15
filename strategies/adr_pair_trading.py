@@ -44,7 +44,7 @@ def adr_pair(data, p, test):
 					trades.append(('BABZ', price, min(10, size), False))
 		asks=data['sell']
 		if asks and p.securities['baba']==-10:
-			for price, size in bids
+			for price, size in asks:
 				if price <= get_local_average('BABZ') + 2:
 					trades.append(('BABZ', price, min(10, size), True))
 
