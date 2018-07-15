@@ -6,7 +6,7 @@ totalCountDict = defaultdict(int) # number of trades
 windowDict = defaultdict(list) # last n prices
 
 MIN_COUNT_TO_TRADE = 5 # when do we trust our average?
-MARGIN=5
+MARGIN=10
 
 def adr_pair(data, p, test):
 	valid_symbols = ['BABA', 'BABZ']
@@ -27,7 +27,6 @@ def adr_pair(data, p, test):
 					break
 				temp_size=size if p.get('baba')-size>=-10 else p.get('baba')+10
 				trades.append(('BABA', price, temp_size, False))
-				p.buffered_buys+=temp_size
 
 		asks=data['sell']
 		for price, size in asks:
@@ -36,32 +35,15 @@ def adr_pair(data, p, test):
 					break
 				temp_size=size if p.get('baba')+size<=10 else 10-p.get('baba')
 				trades.append(('BABA', price, temp_size, True))
-				p.buffered_sells+=temp_size
-
 
 	if data['type'] == 'book' and data['symbol'] == 'BABZ':
-		if p.buffered_buys!=0 or p.buffered_sells!=0:
-			print(p.buffered_sells,p.buffered_buys)
 		bids=data['buy']
-		for price, size in bids:
-
-			if size>p.buffered_sells:
-				trades.append(('BABZ',price,p.buffered_sells,False))
-				p.buffered_sells=0
-				break
-			else:
-				trades.append(('BABZ',price,size,False))
-				p.buffered_sells-=size
-
+		if bids:
+			price, size = bids[0]
+			trades.append(('BABZ', price, min(abs(p.securities['baba']),size), False))
 		asks=data['sell']
-		for price, size in asks:
-
-			if size>p.buffered_buys:
-				p.buffered_buys=0
-				trades.append(('BABZ',price,p.buffered_buys,True))
-				break
-			else:
-				trades.append(('BABZ',price,size,True))
-				p.buffered_buys-=size
+		if asks:
+			price, size = asks[0]
+			trades.append(('BABZ', price, min(abs(p.securities['baba']),size), True))
 
 	return trades
