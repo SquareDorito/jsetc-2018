@@ -100,7 +100,7 @@ def main(test_mode, srv):
                 # check if an xlk order went through
                 if b.xlks.get(data['order_id']):
                     b.limits['XLK'][0 if data['dir'] == 'BUY' else 1] -= data['size']
-                    p.diff['XLK'] += (1 if data['dir'] == 'BUY' else -1 ) * data['size']
+                    p.diff['xlk'] += (1 if data['dir'] == 'BUY' else -1 ) * data['size']
 
                 delta = 1 if data['dir'] == 'SELL' else -1
                 sym = data['symbol']
