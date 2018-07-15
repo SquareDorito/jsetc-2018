@@ -123,6 +123,7 @@ def main(test_mode, srv):
         if test_mode:
             b.test_run(data, p)
         else:
+            print(data)
             b.run(data, p)
      
 
