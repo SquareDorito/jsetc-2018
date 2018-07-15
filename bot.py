@@ -18,7 +18,6 @@ class Bot:
 		return json.loads(self.exchange.readline())
 
 	def trade(self, sym, price, size, buy):
-<<<<<<< HEAD
 		if sym == 'XLK':
 			if self.limits[sym][0 if buy else 1] + size > 100:
 				print('rejected order', self.limits[sym])
@@ -26,23 +25,6 @@ class Bot:
 			else:
 				self.limits[sym][0 if buy else 1] += size
 				self.xlks[self.id] = True
-||||||| merged common ancestors
-		# if sym == 'XLK':
-		# 	if self.limits[sym][0 if buy else 1] + size > 100:
-		# 		print('rejected order', self.limits[sym])
-		# 		return 
-		# 	else:
-		# 		self.limits[sym][0 if buy else 1] += size
-		# 		self.xlks[self.id] = True
-=======
-		# if sym == 'XLK':
-		# 	if self.limits[sym][0 if buy else 1] + size > 100:
-		# 		print('rejected order', self.limits[sym])
-		# 		return
-		# 	else:
-		# 		self.limits[sym][0 if buy else 1] += size
-		# 		self.xlks[self.id] = True
->>>>>>> 79aa36fb42f0fe4c6e4dbeaed794aa9ac2b73a7f
 
 		direction = 'BUY' if buy else 'SELL'
 		order = {
