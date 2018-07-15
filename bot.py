@@ -7,7 +7,7 @@ class Bot:
 		self.test = test_mode
 		self.conversions = {}
 		self.limits = {'XLK': [0, 0], 'BABA': [0, 0]}
-		self.adr=[]
+		self.xlks=[]
 		self.id = 0
 
 	def write_to_exchange(self, obj):
