@@ -49,7 +49,7 @@ class Bot:
 			'dir': direction,
 			'size': size
 		}
-		if self.test:
+		#if self.test:
 			#print(order)
 		self.conversions[self.id] = (sym, size, buy)
 		self.write_to_exchange(order)
