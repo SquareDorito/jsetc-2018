@@ -67,6 +67,7 @@ class Bot:
 		for strategy in strategies:
 			trades = strategy(data, p, False)
 			for trade in trades:
+				print(trade)
 				if len(trade) == 0:
 					continue
 				sym, price, size, buy = trade
