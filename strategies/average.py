@@ -6,7 +6,7 @@ totalCountDict = defaultdict(int)
 WINDOW_SIZE = 10
 windowDict = defaultdict(list)
 
-EXP_RATIO = .9
+EXP_RATIO = .7
 expAverageDict = {}
 
 localAverageDict = defaultdict(list)
@@ -94,7 +94,7 @@ def read_data(
 
 def get_local_average(symbol, windowDict=windowDict):
     # if test:
-    #     return expAverageDict['symbol']
+    #     return expAverageDict[symbol]
     if len(windowDict[symbol]) > 0:
         return 1.0 * sum(windowDict[symbol]) / len(windowDict[symbol])
     return -1
