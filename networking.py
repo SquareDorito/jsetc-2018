@@ -121,7 +121,6 @@ def main(test_mode, srv):
             data_type = data['type']
 
         if test_mode:
-            print('run')
             b.test_run(data, p)
         else:
             b.run(data, p)

@@ -18,8 +18,6 @@ def etf(data, p, test):
 	)
 	trades = []
 	if get_local_average('GOOG', windowDict) < 0 or get_local_average('AAPL', windowDict) < 0 or get_local_average('MSFT', windowDict) < 0:
-		if test:
-			print('not enough data')
 		return trades
 	constituents = 2 * get_local_average('GOOG', windowDict) + 2 * get_local_average('AAPL', windowDict) + 3 * get_local_average('MSFT', windowDict) + 3 * 1000
 	constituents = constituents / 10
