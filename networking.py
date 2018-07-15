@@ -87,7 +87,6 @@ def main(test_mode, srv):
         while data_type in ['fill', 'ack', 'reject']:
             # print(data)
             if data_type == 'fill':
-                if data['symbol']=='BABA':
                 # check if an xlk order went through
                 if b.xlks.get(data['order_id']):
                     b.limits['XLK'][0 if data['dir'] == 'BUY' else 1] -= data['size']
@@ -124,7 +123,6 @@ def main(test_mode, srv):
         if test_mode:
             b.test_run(data, p)
         else:
-            print(data)
             b.run(data, p)
 
 
