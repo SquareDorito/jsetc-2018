@@ -6,7 +6,7 @@ class Bot:
 		self.exchange = exchange
 		self.test = test_mode
 		self.conversions = {}
-		self.limits = {'XLK': [0, 0], 'BABA': [0, 0]}
+		self.limits = {'XLK': [0, 0], 'BABA': [0, 0], 'BABZ': [0, 0]}
 		self.xlks={}
 		self.adr_fills_buys=[]
 		self.adr_fills_sells=[]
@@ -27,7 +27,14 @@ class Bot:
 			else:
 				self.limits[sym][0 if buy else 1] += size
 				self.xlks[self.id] = True
-		if sym == 'BABA':
+		elif sym == 'BABA':
+			if self.limits[sym][0 if buy else 1] + size > 10:
+				# rejects orders that block
+				return
+			else:
+				self.limits[sym][0 if buy else 1] += size
+				self.xlks[self.id] = True
+		elif sym == 'BABZ':
 			if self.limits[sym][0 if buy else 1] + size > 10:
 				# rejects orders that block
 				return

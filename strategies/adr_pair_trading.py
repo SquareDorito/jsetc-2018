@@ -39,11 +39,13 @@ def adr_pair(data, p, test):
 	if data['type'] == 'book' and data['symbol'] == 'BABZ':
 		bids=data['buy']
 		if bids and p.securities['baba']==10:
-			price, size = bids[0]
-			trades.append(('BABZ', price, min(abs(p.securities['baba']),size), False))
+			for price, size in bids:
+				if price >= get_local_average('BABZ') -2:
+					trades.append(('BABZ', price, min(10, size), False))
 		asks=data['sell']
 		if asks and p.securities['baba']==-10:
-			price, size = asks[0]
-			trades.append(('BABZ', price, min(abs(p.securities['baba']),size), True))
+			for price, size in bids
+				if price <= get_local_average('BABZ') + 2:
+					trades.append(('BABZ', price, min(10, size), True))
 
 	return trades
