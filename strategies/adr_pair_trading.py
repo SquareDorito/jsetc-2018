@@ -27,7 +27,8 @@ def adr_pair(data, p, test):
 					break
 				temp_size=size if p.get('babz')-size>=-10 else p.get('babz')+10
 				trades.append(('BABZ', price, temp_size, False))
-				trades.append(('BABA', price, temp_size, True))
+				if p.get('baba')+temp_size<=10:
+					trades.append(('BABA', price, temp_size, True))
 
 		asks=data['sell']
 		for price, size in asks:
@@ -36,6 +37,7 @@ def adr_pair(data, p, test):
 					break
 				temp_size=size if p.get('babz')+size<=10 else 10-p.get('babz')
 				trades.append(('BABZ', price, temp_size, True))
-				trades.append(('BABA', price, temp_size, False))
+				if p.get('baba')-temp_size>=-10:
+					trades.append(('BABA', price, temp_size, False))
 	#print(trades)
 	return trades
