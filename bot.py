@@ -7,7 +7,7 @@ class Bot:
 		self.test = test_mode
 		self.conversions = {}
 		self.limits = {'XLK': [0, 0], 'BABA': [0, 0]}
-		self.xlks = {}
+		self.xlks={}
 		self.id = 0
 
 	def write_to_exchange(self, obj):
@@ -62,7 +62,7 @@ class Bot:
 		if abs(p.get('BABA'))+abs(p.get('BABZ'))==20:
 			direction = p.get('BABA')<0
 			self.convert('BABA',10, direction)
-		
+
 		if abs(p.get('XLK')) > 90:
 			direction = p.get('XLK') < 0
 			self.convert('XLK', 50, direction)
