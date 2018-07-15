@@ -48,8 +48,8 @@ def etf(data, p, test):
 					for price, m_size in market:
 						if size == 0:
 							break
-						trades.append((symbol, price, max(size, m_size), direction))
-						size -= max(size, m_size)
+						trades.append((symbol, price, min(size, m_size), direction))
+						size -= min(size, m_size)
 					p.diff[symbol.lower()] = sign * size
 
 		if symbol == 'XLK':
