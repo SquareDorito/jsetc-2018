@@ -82,11 +82,9 @@ def read_data(
         else:
             expAverageDict[symbol] = price
 
-        count += 1
-        if count % 10 == 0:
-            localAverageDict[symbol].append(get_local_average(symbol))
-            print(symbol)
-            print(localAverageDict[symbol])
+        localAverageDict[symbol].append(get_local_average(symbol))
+        print(symbol)
+        print(localAverageDict[symbol])
 
 
 def get_local_average(symbol, windowDict=windowDict):
