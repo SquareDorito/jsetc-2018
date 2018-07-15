@@ -29,10 +29,10 @@ def average(data, p, test):
         else:
             average = get_local_average(symbol)
 
-        if test:
-            average = expAverageDict[symbol]
-            if symbol == 'BABA':
-                average = expAverageDict['BABZ']
+        # if test:
+        #     average = expAverageDict[symbol]
+        #     if symbol == 'BABA':
+        #         average = expAverageDict['BABZ']
 
         bids = data['buy']
         for price, size in bids:
