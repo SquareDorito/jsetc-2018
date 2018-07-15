@@ -1,5 +1,4 @@
 from collections import defaultdict
-import matplotlib.pyplot as plt
 
 MIN_COUNT_TO_TRADE = 5 # when do we trust our average?
 averageDict = defaultdict(int)
@@ -82,10 +81,9 @@ def read_data(
         else:
             expAverageDict[symbol] = price
 
-        localAverageDict[symbol].append(get_local_average(symbol))
-        if len(localAverageDict[symbol]) % 50 == 0:
-            plt.ylabel('some numbers')
-            plt.show()
+        if len(localAverageDict[symbol]) % 10 == 0:
+            localAverageDict[symbol].append(get_local_average(symbol))
+            print(symbol + ":" + localAverageDict[symbol])
 
 
 def get_local_average(symbol, windowDict=windowDict):
