@@ -83,8 +83,8 @@ def read_data(
 
         if len(localAverageDict[symbol]) % 10 == 0:
             localAverageDict[symbol].append(get_local_average(symbol))
-            print symbol
-            print localAverageDict[symbol]
+            print(symbol)
+            print(localAverageDict[symbol])
 
 
 def get_local_average(symbol, windowDict=windowDict):
