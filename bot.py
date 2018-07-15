@@ -50,7 +50,7 @@ class Bot:
 			'size': size
 		}
 		if self.test:
-			print(order)
+			#print(order)
 		self.conversions[self.id] = (sym, size, buy)
 		self.write_to_exchange(order)
 		self.id += 1
@@ -82,7 +82,7 @@ class Bot:
 			self.convert('XLK', 30, direction)
 
 		for strategy in test_strategies:
-			print(strategy)
+			#print(strategy)
 			trades = strategy(data, p, True)
 			print(trades)
 			for trade in trades:
