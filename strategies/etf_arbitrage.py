@@ -26,31 +26,31 @@ def etf(data, p, test):
 		symbol = data['symbol']
 		bids = data['buy']
 		asks = data['sell']
-		if test:
-			if abs(p.diff['xlk']) > 10:
-				diff = 10 * (p.diff['xlk'] // 10)
-				if diff < 0:
-					diff += 10
-				p.diff['goog'] -= 2 * diff / 10
-				p.diff['aapl'] -= 2 * diff / 10
-				p.diff['msft'] -= 3 * diff / 10 
-				p.diff['bond'] -= 3 * diff / 10
-				p.diff['xlk'] -= diff
-				print('THIS IS WHERE THE DIFF IS CALCULATED', p.diff)
-			if symbol in valid_symbols[1:]:
-				if p.diff[symbol.lower()] != 0:
-					size = p.diff[symbol.lower()]
-					sign = 1 if size > 0 else -1
-					direction = size > 0
-					size = abs(size)
-					
-					market = data['buy' if direction else 'sell']
-					for price, m_size in market:
-						if size == 0:
-							break
-						trades.append((symbol, price, min(size, m_size), direction))
-						size -= min(size, m_size)
-					p.diff[symbol.lower()] = sign * size
+		
+		if abs(p.diff['xlk']) > 10:
+			diff = 10 * (p.diff['xlk'] // 10)
+			if diff < 0:
+				diff += 10
+			p.diff['goog'] -= 2 * diff / 10
+			p.diff['aapl'] -= 2 * diff / 10
+			p.diff['msft'] -= 3 * diff / 10 
+			p.diff['bond'] -= 3 * diff / 10
+			p.diff['xlk'] -= diff
+			print('THIS IS WHERE THE DIFF IS CALCULATED', p.diff)
+		if symbol in valid_symbols[1:]:
+			if p.diff[symbol.lower()] != 0:
+				size = p.diff[symbol.lower()]
+				sign = 1 if size > 0 else -1
+				direction = size > 0
+				size = abs(size)
+				
+				market = data['buy' if direction else 'sell']
+				for price, m_size in market:
+					if size == 0:
+						break
+					trades.append((symbol, price, min(size, m_size), direction))
+					size -= min(size, m_size)
+				p.diff[symbol.lower()] = sign * size
 
 		if symbol == 'XLK':
 			for price, size in asks:
