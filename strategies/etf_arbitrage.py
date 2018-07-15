@@ -23,7 +23,6 @@ def etf(data, p, test):
 	constituents = constituents / 10
 
 	if data['type'] == 'book':
-		
 		symbol = data['symbol']
 		bids = data['buy']
 		asks = data['sell']

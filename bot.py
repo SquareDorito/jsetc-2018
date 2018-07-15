@@ -38,12 +38,13 @@ class Bot:
 			'price': price,
 			'size': size,
 		}
-		if self.test:
-			print(order)
+		# if self.test:
+			# print(order)
 		self.write_to_exchange(order)
 		self.id += 1
 
 	def convert(self, sym, size, buy):
+		print('entered convert')
 		direction = 'BUY' if buy else 'SELL'
 		order = {
 			'type': 'convert',
@@ -52,8 +53,8 @@ class Bot:
 			'dir': direction,
 			'size': size
 		}
-		#if self.test:
-			#print(order)
+		if self.test:
+			print(order)
 		self.conversions[self.id] = (sym, size, buy)
 		self.write_to_exchange(order)
 		self.id += 1
@@ -62,7 +63,7 @@ class Bot:
 		if abs(p.get('BABA'))+abs(p.get('BABZ'))==20:
 			direction = p.get('BABA')<0
 			self.convert('BABA',10, direction)
-
+		
 		if abs(p.get('XLK')) > 90:
 			direction = p.get('XLK') < 0
 			self.convert('XLK', 30, direction)
@@ -80,14 +81,16 @@ class Bot:
 			direction = p.get('BABA')<0
 			self.convert('BABA',10, direction)
 
+		print(p.get('XLK'))
 		if abs(p.get('XLK')) > 90:
+			print('over limit')
 			direction = p.get('XLK') < 0
 			self.convert('XLK', 30, direction)
 
 		for strategy in test_strategies:
 			#print(strategy)
 			trades = strategy(data, p, True)
-			print(trades)
+			# print(trades)
 			for trade in trades:
 				if len(trade) == 0:
 					continue
