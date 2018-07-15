@@ -5,6 +5,7 @@ MIN_COUNT_TO_TRADE = 5
 averageDict = defaultdict(int) # averages from the start
 totalCountDict = defaultdict(int) # number of trades
 windowDict = defaultdict(list) # last n prices
+expAverageDict = {}
 
 def etf(data, p, test):
 	MARGIN = 30
@@ -13,7 +14,7 @@ def etf(data, p, test):
 		data, p, test, 
 		averageDict=averageDict, 
 		totalCountDict=totalCountDict, 
-		windowDict=windowDict, 
+		windowDict=windowDict,
 		valid_symbols=valid_symbols
 	)
 	trades = []
